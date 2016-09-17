@@ -20,7 +20,6 @@
     
     //\///////////////
     
-    vm.speech = '__________';
     vm.history = [];
     vm.responses = [];
     vm.sentResponses = [];
