@@ -1,0 +1,56 @@
+<div ng-app="RobotApp">
+  <div ng-controller="RobotController as vm">
+    <form ng-submit="vm.say(text);text=null">
+      <input type="text" ng-model="text" ng-submit="vm.say(text)" />
+      <input type="submit" ng-disabled="!text" />
+    </form>
+    Say hello
+    <div id="robot">
+    I am a robot.
+    You said "{{vm.speech.value}}" to me{{vm.speech.count > 1 ? ', for the ' + vm.speech.count + vm.getNumberSuffix(vm.speech.count) + ' time' : null}}.
+    <div ng-show="vm.response">
+      <p>I am responding for the {{vm.response.totalTimesResponded}}{{vm.getNumberSuffix(vm.response.totalTimesResponded)}} time.</p>
+      <p>I respond with "{{vm.response.value}}".</p>
+    </div>
+    </div>
+    <br/>
+    <button ng-click="showHistory=!showHistory">
+      {{showHistory ? 'Hide History' : 'Show History'}}
+    </button>
+    <div id="history" ng-show="showHistory">
+      <div>
+        {{vm.history.length}} message(s) have been sent to the robot.
+      </div>
+      <br/>
+      <div id="historyTranscript" ng-repeat="h in vm.history track by h.id">
+        {{h.value}} {{h.count ? 'x' + h.count : null}}
+      </div>
+    </div>
+    <br/>
+    <button ng-click="showResponses=!showResponses">
+      {{showResponses ? 'Hide Responses' : 'Show Responses'}}
+    </button>
+    <div id="responses" ng-show="showResponses">
+      <div>
+        {{vm.responses.length}} message(s) have been catalogued to the robot.
+      </div>
+      <br/>
+      <div id="responsesTranscript" ng-repeat="r in vm.responses track by r.id">
+        {{r.value}}
+      </div>
+    </div>
+    <br/>
+    <button ng-click="showSentResponses=!showSentResponses">
+      {{showSentResponses ? 'Hide Sent Responses' : 'Show Sent Responses'}}
+    </button>
+    <div id="sentResponses" ng-show="showSentResponses">
+      <div>
+        The following {{vm.sentResponses.length}} response(s) have been sent by the robot.
+      </div>
+      <br/>
+      <div id="sentResponsesTranscript" ng-repeat="r in vm.sentResponses track by r.id">
+        {{r.value}} {{r.count ? 'x' + r.count : null}}
+      </div>
+    </div>
+  </div>
+</div>
